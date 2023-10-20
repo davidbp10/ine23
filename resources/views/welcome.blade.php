@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-2"> Holaa
+      <div class="col-sm-2">
 @endsection
 
 
