@@ -16,8 +16,8 @@
             <div class="col-sm-2 card card-body " style="border-color: white;">
               <a href="#"><img src={{ $product->imgUrl }} style="width: 300px; height: 300px;"></a>
               <h3>{{ $product->name }}</h3>
-              <h5>{{ $product->price }}€</h5>
-              <p><s>89,99€</s> {{ $product->discountPercent * 100 }}% de descuento</p>
+              <h5>{{ number_format($product->price * (1 - $product->discountPercent), 2, '.', '') }}€</h5>
+              <p><s>{{ $product->price }}</s> {{ $product->discountPercent * 100 }}% de descuento</p>
             </div>
           @endforeach
           </div>
