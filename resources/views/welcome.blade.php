@@ -12,50 +12,31 @@
           <!-- SECTION: About me -->
           <h2>Ofertas del día</h2>
           <div class="row mb-4" style="display:flex; justify-content:space-between;">
+          @foreach ($aProduct_offering as $product)
             <div class="col-sm-2 card card-body " style="border-color: white;">
-              <a href="#"><img src="img/press_de_banca.jpg" style="width: 300px; height: 300px;"></a>
-              <h3>Banco de press</h3>
-              <h5>69,99€</h5>
-              <p><s>89,99€</s> 23% de descuento</p>
+              <a href="#"><img src={{ $product->imgUrl }} style="width: 300px; height: 300px;"></a>
+              <h3>{{ $product->name }}</h3>
+              <h5>{{ $product->price }}€</h5>
+              <p><s>89,99€</s> {{ $product->discountPercent * 100 }}% de descuento</p>
             </div>
-            <div class="col-sm-2 card card-body" style="border-color: white;">
-              <a href="#"><img src="img/dominadas.jpg" style="width: 300px; height: 300px;"></a>
-              <h3>Barra de dominadas</h3>
-              <h5>49,99€</h5>
-              <p><s>59,99€</s> 17% de descuento</p>
-            </div>
-            <div class="col-sm-2 card card-body" style="border-color: white;">
-              <a href="#"><img src="img/mancuernas.jpg" style="width: 300px; height: 300px;"></a>
-              <h3>Mancuernas 25kg</h3>
-              <h5>34,99€</h5>
-              <p><s>49,99€</s> 30% de descuento</p>
-            </div>
-            <div class="col-sm-2 card card-body" style="border-color: white;">
-              <a href="#"><img src="img/guantes.jpg" style="width: 300px; height: 300px;"></a>
-              <h3>Guantes de boxeo</h3>
-              <h5>47,99€</h5>
-              <p><s>59,99€</s> 20% de descuento</p>
-            </div>
+          @endforeach
           </div>
+
           
           <!-- SECTION: Some links -->
           <h2>Nuevos productos</h2>
           <div class="row mb-4" style="display:flex; justify-content:space-between;">
-            <div class="col-sm-2 card card-body " style="border-color: white;">
-              <a href="#"><img src="img/straps.jpg" style="width: 400px; height: 400px;"></a>
-              <h3><em>Straps</em></h3>
-              <h5>13,99€</h5>
-            </div>
-            <div class="col-sm-2 card card-body" style="border-color: white;">
-              <a href="#"><img src="img/correr.jpg" style="width: 400px; height: 400px;"></a>
-              <h3>Máquina de correr</h3>
-              <h5>139,99€</h5>
-            </div>
-            <div class="col-sm-2 card card-body" style="border-color: white;">
-              <a href="#"><img src="img/barra.jpg" style="width: 400px; height: 400px;"></a>
-              <h3>Barra Z para biceps</h3>
-              <h5>34,99€</h5>
-            </div>
+
+            @foreach ($aProduct_new as $product)
+              @if (!$product->HasDiscount())
+                <div class="col-sm-2 card card-body " style="border-color: white;">
+                  <a href="#"><img src={{ $product->imgUrl }} style="width: 400px; height: 400px;"></a>
+                  <h3>{{ $product->name }}</h3>
+                  <h5>{{ $product->price }}€</h5>
+                </div>
+              @endif
+            @endforeach
+
           </div>
         </div>
       </div>
