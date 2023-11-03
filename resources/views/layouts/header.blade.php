@@ -7,7 +7,7 @@
         </form>
         <div>
             <a href="#">Iniciar sesión</a>
-            <a href="#"><img src="ico/carrito.jpg" style="width: 70px; height: 50px;"></a>
+            <a href="#"><img src="{{ asset('ico/carrito.jpg') }}" style="width: 70px; height: 50px;"></a>
         </div>
     </div>
 </div>

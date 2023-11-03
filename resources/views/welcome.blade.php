@@ -14,7 +14,7 @@
           <div class="row mb-4" style="display:flex; justify-content:space-between;">
           @foreach ($aProduct_offering as $product)
             <div class="col-sm-2 card card-body " style="border-color: white;">
-              <a href="#"><img src={{ $product->imgUrl }} style="width: 300px; height: 300px;"></a>
+              <a href="{{ route('product.show', $product->id) }}"><img src={{ $product->imgUrl }} style="width: 300px; height: 300px;"></a>
               <h3>{{ $product->name }}</h3>
               <h5>{{ number_format($product->price * (1 - $product->discountPercent), 2, '.', '') }}€</h5>
               <p><s>{{ $product->price }}</s> {{ $product->discountPercent * 100 }}% de descuento</p>
@@ -30,7 +30,7 @@
             @foreach ($aProduct_new as $product)
               @if (!$product->HasDiscount())
                 <div class="col-sm-2 card card-body " style="border-color: white;">
-                  <a href="#"><img src={{ $product->imgUrl }} style="width: 400px; height: 400px;"></a>
+                  <a href="{{ route('product.show', $product->id) }}"><img src="{{ asset($product->imgUrl) }}" style="width: 400px; height: 400px;"></a>
                   <h3>{{ $product->name }}</h3>
                   <h5>{{ $product->price }}€</h5>
                 </div>

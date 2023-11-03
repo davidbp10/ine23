@@ -28,14 +28,19 @@ class Product extends Model
     }
 
     public function HasDiscount()
-{
-    if ($this->discountPercent !== null) {
+    {
+        if ($this->discountPercent !== null) {
        
-        $now = now();
-        return $now >= $this->discountStart_at && $now <= $this->discountEnd_at;
+            $now = now();
+            return $now >= $this->discountStart_at && $now <= $this->discountEnd_at;
+        }
+
+        return false;
     }
 
-    return false;
-}
+    public function Company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
 }
 
