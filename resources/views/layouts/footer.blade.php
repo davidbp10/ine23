@@ -14,7 +14,7 @@
             <div class="col-md-3">
                 <h4>Ayuda</h4>
         
-                <p>frecuentes</p>
+                <p>Frecuentes</p>
                 <p>Soporte</p>
         
             </div>

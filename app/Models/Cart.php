@@ -26,6 +26,7 @@ class Cart extends Model
             'name' => $product->name,
             'imgUrl' => $product->imgUrl,
             'price' => $product->price,
+            'discount' => $product->discountPercent,
             'quantity' => 1
         ];
      
@@ -36,7 +37,10 @@ class Cart extends Model
         }
      
         $this->iTotalItems += 1;
-        $this->dTotalPrice += $product->price;
+
+        if ($product->HasDiscount())
+            $this->dTotalPrice += number_format($product->price * (1 - $product->discountPercent), 2, '.', '');
+        else $this->dTotalPrice += $product->price;
     }
      
     public function Remove(Product $product) {
@@ -46,7 +50,9 @@ class Cart extends Model
             if ($this->htItem[$productId]['quantity'] > 0) {
                 $this->htItem[$productId]['quantity'] -= 1;
                 $this->iTotalItems -= 1;
-                $this->dTotalPrice -= $product->price;
+                if ($product->HasDiscount())
+                    $this->dTotalPrice -= number_format($product->price * (1 - $product->discountPercent), 2, '.', '');
+                else $this->dTotalPrice -= $product->price;
             }
         }
     }

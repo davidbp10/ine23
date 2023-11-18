@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <style>
             .fakeimg { height: 100px; background: #aaa; }
         </style>
