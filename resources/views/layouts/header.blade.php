@@ -13,8 +13,12 @@
             <a href="{{ route('cart.show', $carrito) }}" style="text-decoration: none;">
                 <img src="{{ asset('ico/carrito.jpg') }}" style="width: 70px; height: 50px;">
             </a>
-            @if($carrito->iTotalItems >= 0)
-                <span style="color:#FFFFFF; font-size: 20px;">{{ $carrito->iTotalItems }}</span>
+            @if(!$carrito)
+                <span style="color:#FFFFFF; font-size: 20px;">0</span>
+            @else
+                @if($carrito->iTotalItems >= 0)
+                    <span style="color:#FFFFFF; font-size: 20px;">{{ $carrito->iTotalItems }}</span>
+                @endif   
             @endif
         </div>
     </div>

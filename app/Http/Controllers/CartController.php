@@ -16,19 +16,19 @@ class CartController extends Controller
         return view('cart.show', compact('cart'));
     }
     public function add(Product $product){
-        $cart = session('cart');
+        $cart = session('cart', new Cart());
         $cart->add($product);
         session()->put('cart', $cart);
     }
       
     public function remove(Product $product){
-        $cart = session('cart');
+        $cart = session('cart', new Cart());
         $cart->remove($product);
         session()->put('cart', $cart);
     }
       
     public function removeAll(Product $product){
-        $cart = session('cart');
+        $cart = session('cart', new Cart());
         $cart->removeAll($product);
         session()->put('cart', $cart);
     }
