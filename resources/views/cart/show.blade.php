@@ -53,7 +53,7 @@
                 @if(session('cart')->iTotalItems < 1)
                     <h2>Total: $0</h2>
                 @else
-                    <h2>Total: ${{ session('cart')->dTotalPrice }}</h2>
+                    <h2>Total: {{ session('cart')->dTotalPrice }}€</h2>
                 @endif
            @else
                <p>El carrito está vacío</p>
