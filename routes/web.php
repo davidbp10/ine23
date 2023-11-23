@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::get('/addToCart/{product}', [ProductController::class, 'addToCart'])->nam
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
 Route::get('/cart/{operation}/{product}', [CartController::class, 'operate'])->name('cart.operate');
+
+Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');

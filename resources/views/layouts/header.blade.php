@@ -9,10 +9,18 @@
             @php
                 $carrito = session()->get('cart', []);
             @endphp
-            <a href="#">Iniciar sesión</a>
+
+            @if(Auth::check())
+                <a href="{{ route('dashboard') }}" style="color: #FFFFFF; text-decoration: none;">{{ Auth::user()->name }}</a>
+                <a href="{{ route('user.logout') }}" style="color: #FFFFFF; text-decoration: none;">x</a>
+            @else
+                <a href="{{ route('login') }}" style="color: #FFFFFF; text-decoration: none;">Autenticación</a>
+            @endif
+
             <a href="{{ route('cart.show', $carrito) }}" style="text-decoration: none;">
                 <img src="{{ asset('ico/carrito.jpg') }}" style="width: 70px; height: 50px;">
             </a>
+
             @if(!$carrito)
             @else
                 @if($carrito->iTotalItems > 0)
