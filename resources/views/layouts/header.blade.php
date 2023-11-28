@@ -26,6 +26,11 @@
                 @if($carrito->iTotalItems > 0)
                     <span style="color:#FFFFFF; font-size: 20px;">{{ $carrito->iTotalItems }}</span>
                 @endif
+                @if($carrito->dTotalPrice < 0)
+                    @php
+                        $carrito->dTotalPrice = 0;
+                    @endphp
+                @endif
             @endif
         </div>
     </div>

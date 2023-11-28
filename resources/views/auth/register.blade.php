@@ -1,60 +1,56 @@
 @extends('templates.master')
+
 @section('content-center')
-<x-authentication-card>
-    <x-slot name="logo">
-    </x-slot>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('auth.Register') }}</div>
 
-    <x-validation-errors class="mb-4" />
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
 
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">{{ __('auth.Name') }}</label>
+                                <input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                            </div>
 
-        <div>
-            <x-label for="name" value="{{ __('auth.Name') }}" />
-            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-        </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">{{ __('auth.Email') }}</label>
+                                <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                            </div>
 
-        <div class="mt-4">
-            <x-label for="email" value="{{ __('auth.Email') }}" />
-            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-        </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">{{ __('auth.Password') }}</label>
+                                <input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
+                            </div>
 
-        <div class="mt-4">
-            <x-label for="password" value="{{ __('auth.Password') }}" />
-            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-        </div>
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">{{ __('auth.Confirm Password') }}</label>
+                                <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" />
+                            </div>
 
-        <div class="mt-4">
-            <x-label for="password_confirmation" value="{{ __('auth.Confirm Password') }}" />
-            <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-        </div>
+                            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" name="terms" id="terms" class="form-check-input" required />
+                                    <label class="form-check-label" for="terms">
+                                        {!! __('auth.I agree to the :terms_of_service and :privacy_policy', [
+                                            'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="link">'.__('auth.Terms of Service').'</a>',
+                                            'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="link">'.__('auth.Privacy Policy').'</a>',
+                                        ]) !!}
+                                    </label>
+                                </div>
+                            @endif
 
-        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-            <div class="mt-4">
-                <x-label for="terms">
-                    <div class="flex items-center">
-                        <x-checkbox name="terms" id="terms" required />
-
-                        <div class="ml-2">
-                            {!! __('auth.I agree to the :terms_of_service and :privacy_policy', [
-                                    'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('auth.Terms of Service').'</a>',
-                                    'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('auth.Privacy Policy').'</a>',
-                            ]) !!}
-                        </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('login') }}" class="text-muted me-3">{{ __('auth.Already registered?') }}</a>
+                                <button type="submit" class="btn btn-primary">{{ __('auth.Register') }}</button>
+                            </div>
+                        </form>
                     </div>
-                </x-label>
+                </div>
             </div>
-        @endif
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('auth.Already registered?') }}
-            </a>
-
-            <x-button class="ml-4">
-                {{ __('auth.Register') }}
-            </x-button>
         </div>
-    </form>
-</x-authentication-card>
+    </div>
 @endsection

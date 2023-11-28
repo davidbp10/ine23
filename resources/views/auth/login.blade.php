@@ -1,53 +1,53 @@
 @extends('templates.master')
+
 @section('content-center')
-<x-authentication-card>
-    <x-slot name="logo">
-    </x-slot>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <x-authentication-card>
+                    <x-slot name="logo">
+                        <!-- Puedes agregar un logotipo si lo deseas -->
+                    </x-slot>
 
-    <x-validation-errors class="mb-4" />
+                    <x-validation-errors class="mb-4" />
 
-    @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ session('status') }}
+                    @if (session('status'))
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">{{ __('auth.Email') }}</label>
+                            <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">{{ __('auth.Password') }}</label>
+                            <input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="remember" id="remember_me" class="form-check-input" />
+                            <label class="form-check-label" for="remember_me">{{ __('auth.Remember me') }}</label>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="text-muted me-3">{{ __('auth.Forgot your password?') }}</a>
+                            @endif
+
+                            <button type="submit" class="btn btn-primary">{{ __('auth.Log in') }}</button>
+
+                            {{-- Botón de Registro --}}
+                            <a href="{{ route('register') }}" class="btn btn-secondary ms-2">{{ __('auth.Register') }}</a>
+                        </div>
+                    </form>
+                </x-authentication-card>
+            </div>
         </div>
-    @endif
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <div>
-            <x-label for="email" value="{{ __('auth.Email') }}" />
-            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-        </div>
-
-        <div class="mt-4">
-            <x-label for="password" value="{{ __('auth.Password') }}" />
-            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-        </div>
-
-        <div class="block mt-4">
-            <label for="remember_me" class="flex items-center">
-                <x-checkbox id="remember_me" name="remember" />
-                <span class="ml-2 text-sm text-gray-600">{{ __('auth.Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('auth.Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-button class="ml-4">
-                {{ __('auth.Log in') }}
-            </x-button>
-
-            {{-- Botón de Registro --}}
-            <a href="{{ route('register') }}" class="btn btn-primary ml-4">
-                {{ __('auth.Register') }}
-            </a>
-        </div>
-    </form>
-</x-authentication-card>
+    </div>
 @endsection
