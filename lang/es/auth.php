@@ -28,4 +28,8 @@ return [
     'Forgot your password?' => '¿Has olvidado tu contraseña?',
     'Log in' => 'Iniciar sesión',
     'I agree to the :terms_of_service and :privacy_policy' => 'Estoy de acuerdo con los :terms_of_service y la :privacy_policy',
+    'Old password' => 'Antigua contraseña',
+    'New password' => 'Nueva contraseña',
+    'Repeat password' => 'Repetir contraseña',
+    'Save' => 'Guardar',
 ];

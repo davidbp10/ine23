@@ -11,7 +11,7 @@
             @endphp
 
             @if(Auth::check())
-                <a href="{{ route('dashboard') }}" style="color: #FFFFFF; text-decoration: none;">{{ Auth::user()->name }}</a>
+                <a href="{{ route('user.edit') }}" style="color: #FFFFFF; text-decoration: none;">{{ Auth::user()->name }}</a>
                 <a href="{{ route('user.logout') }}" style="color: #FFFFFF; text-decoration: none;">x</a>
             @else
                 <a href="{{ route('login') }}" style="color: #FFFFFF; text-decoration: none;">Autenticación</a>

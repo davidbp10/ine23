@@ -39,3 +39,7 @@ Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::get('/cart/{operation}/{product}', [CartController::class, 'operate'])->name('cart.operate');
 
 Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+
+Route::get('/user', [UserController::class, 'edit'])->name('user.edit');
+
+Route::patch('/user', [UserController::class, 'update'])->name('user.update');

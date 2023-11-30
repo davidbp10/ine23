@@ -4,64 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Update the specified resource in storage.
      */
-    public function index()
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $user = Auth::user();
+        
+        if ($request->oldPass != "") {
+            if (!Hash::check($request->oldPass, $user->password))
+                return back()->withInput()->withErrors(['oldPass' => ['La contraseña original no coincide.']]);
+            else if ($request->newPass == "" || $request->newPass != $request->repeatedPass)
+                return back()->withInput()->withErrors(['newPass' => ['La nueva contraseña está vacía o mal repetida.']]);
+            else
+                $user->password = Hash::make($request->newPass);
+        }
+        $user->name = $request->name;
+        $user->save(); 
+        return back()->with(['success' => ['Los datos han sido modificados.']]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('user.edit');
     }
 
     public function logout()
